@@ -68,19 +68,19 @@ div {
 
 }
 
-#equals {
+/*#equals {
     display: flex;
     align-self: center;
     width: 70px;
 }
-
+*/
 .operator {
     display: flex;
     
     background-color: whitesmoke;
     border-radius: 5px;
     width: 50px;
-    margin: 20px;
+    margin: 5px;
     font-size:large;
     
 
@@ -100,10 +100,7 @@ div {
     justify-content: center;
 }
 
-.digit {
-    
-   
-}
+
 
 #nought {
     display: flex;
