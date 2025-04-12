@@ -35,6 +35,7 @@ function operate(num1, num2, operator="add") {
     };
 };
 
+//get all button elements as variables
 const one = document.getElementById("one");
 const two = document.getElementById("two");
 const three = document.getElementById("three");
@@ -53,3 +54,11 @@ const minus = document.getElementById("minus");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
 const allClear = document.getElementById("AC");
+const displayScreen = document.getElementById("screen")
+
+function writeOne(){
+    displayScreen.textContent = "1";
+    console.log("1");
+}
+
+one.addEventListener("click", writeOne);
