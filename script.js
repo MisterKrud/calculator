@@ -34,3 +34,22 @@ function operate(num1, num2, operator="add") {
             multiply(num1, num2);
     };
 };
+
+const one = document.getElementById("one");
+const two = document.getElementById("two");
+const three = document.getElementById("three");
+const four = document.getElementById("four");
+const five = document.getElementById("five");
+const six = document.getElementById("six");
+const seven = document.getElementById("seven");
+const eight = document.getElementById("eight");
+const nine = document.getElementById("nine");
+const ten = document.getElementById("ten");
+const zero = document.getElementById("zero");
+const decimal = document.getElementById("decimal");
+const equals = document.getElementById("equals");
+const plus = document.getElementById("plus");
+const minus = document.getElementById("minus");
+const multiply = document.getElementById("multiply");
+const divide = document.getElementById("divide");
+const allClear = document.getElementById("AC");
