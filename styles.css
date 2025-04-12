@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     font-family: Orbitron, Verdana, Geneva, Tahoma, sans-serif;
-
+   
 }
 
 div {
@@ -14,8 +14,8 @@ div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70%;
-    max-width: 500px;
+   max-width: 5000px;
+    flex: 1;
     border: darkgrey, solid, 1px;
     border-radius: 10px;
 
@@ -84,7 +84,9 @@ div {
     justify-content: center;
 }
 
-
+#equals, #AC {
+    width: 75px;
+}
 
 
 /*#equals {
