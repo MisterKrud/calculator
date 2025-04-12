@@ -5,17 +5,16 @@ body{
    
 }
 
-div {
-    display: flex;
-    justify-content: center;
+button {
+    text-align: center;
 }
 
 #calculator-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-   max-width: 5000px;
-    flex: 1;
+   
+   
     border: darkgrey, solid, 1px;
     border-radius: 10px;
 
@@ -38,13 +37,16 @@ div {
 }
 #buttons-container {
     display: flex;
+    
 }
 
 .digit,.operator{
     display: flex;
     width: 50px;
+    height: 50px;
     background-color: white;
-    
+    justify-content: center;
+    align-items: center;
     
     margin: 10px;
     border-radius: 10px;
@@ -58,7 +60,7 @@ div {
 
 #operations-container {
    
-    flex-grow: 1;
+   
     align-items: center;
     justify-content:space-around;
     background-color:burlywood;
@@ -66,15 +68,15 @@ div {
 }
 #digits-container {
     background-color: lightgray;
-    flex-grow: 3;
+    
 }
 
 #digits-container, #operations-container {
     display: flex;
-    flex-wrap: wrap;
+   
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    
     margin: 5px;
 
 }
@@ -85,6 +87,7 @@ div {
 }
 
 #equals, #AC {
+   
     width: 75px;
 }
 

@@ -45,20 +45,94 @@ const six = document.getElementById("six");
 const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
-const ten = document.getElementById("ten");
+
 const zero = document.getElementById("zero");
 const decimal = document.getElementById("decimal");
 const equals = document.getElementById("equals");
 const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
-const multiply = document.getElementById("multiply");
-const divide = document.getElementById("divide");
+const multiplication = document.getElementById("multiply");
+const division = document.getElementById("divide");
 const allClear = document.getElementById("AC");
 const displayScreen = document.getElementById("screen")
+const para = document.getElementById("content");
 
-function writeOne(){
-    displayScreen.textContent = "1";
-    console.log("1");
+//EVENT LISTENERS FOR BUTTON CLICKS
+one.addEventListener("click", ()=> {
+      para.textContent += "1";
 }
+);
 
-one.addEventListener("click", writeOne);
+two.addEventListener("click", ()=> {
+        para.textContent += "2";
+ }
+ );
+
+ three.addEventListener("click", ()=> {
+    para.textContent += "3";
+ }
+ );
+ four.addEventListener("click", ()=> {
+    para.textContent += "4";
+}
+);
+
+five.addEventListener("click", ()=> {
+      para.textContent += "5";
+}
+);
+
+six.addEventListener("click", ()=> {
+  para.textContent += "6";
+}
+);
+seven.addEventListener("click", ()=> {
+    para.textContent += "7";
+}
+);
+
+eight.addEventListener("click", ()=> {
+      para.textContent += "8";
+}
+);
+
+nine.addEventListener("click", ()=> {
+  para.textContent += "9";
+}
+);
+zero.addEventListener("click", ()=> {
+  para.textContent += "0";
+}
+);
+
+decimal.addEventListener("click", ()=> {
+    para.textContent += ".";
+  }
+  );
+
+plus.addEventListener("click", ()=> {
+    para.textContent += "+";
+}
+);
+
+minus.addEventListener("click", ()=> {
+para.textContent += "-";
+}
+);
+multiplication.addEventListener("click", ()=> {
+    para.textContent += "X";
+}
+);
+
+division.addEventListener("click", ()=> {
+para.textContent += "/";
+}
+);
+
+allClear.addEventListener("click", ()=> {
+    para.textContent = "";
+    }
+    );
+
+
+
