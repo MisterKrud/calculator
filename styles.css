@@ -20,11 +20,7 @@ div {
     border-radius: 10px;
 
 }
-#digits-container {
-    background-color: lightgray;
-    padding: 5px;
-    margin: 5px;
-}
+
 
 #screen {
     background-color: lightgray;
@@ -40,11 +36,11 @@ div {
 #display {
     margin-right: 15px;
 }
-#buttons {
+#buttons-container {
     display: flex;
 }
 
-.digit {
+.digit,.operator{
     display: flex;
     width: 50px;
     background-color: white;
@@ -55,21 +51,41 @@ div {
     font-size:large;
 }
 
+
+
+
+
+
 #operations-container {
-    display: flex;
-    flex-direction: column;
+   
     flex-grow: 1;
+    align-items: center;
     justify-content:space-around;
     background-color:burlywood;
-    margin: 5px;
+  
+}
+#digits-container {
+    background-color: lightgray;
+    flex-grow: 3;
 }
 
-.operator-group {
+#digits-container, #operations-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+.number-group, .operator-group {
     display: flex;
     justify-content: center;
-    
-
 }
+
+
+
 
 /*#equals {
     display: flex;
@@ -77,31 +93,9 @@ div {
     width: 70px;
 }
 */
-.operator {
-    display: flex;
-    
-    background-color: whitesmoke;
-    border-radius: 5px;
-    width: 50px;
-    margin: 5px;
-    font-size:large;
-    
 
-}
 
-#digits-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-   
-    flex-grow: 3;
 
-}
-
-.number-group {
-    display: flex;
-    justify-content: center;
-}
 
 
 
