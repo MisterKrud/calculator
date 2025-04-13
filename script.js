@@ -20,11 +20,12 @@ let number1;
 let number2;
 let operator;
 
+let answersArray=[]
 let operationsArray = [];
 let num1Array = [];
 let num2Array =[];
 let operatorArray=[]
-
+let answered = false;
 
 
 //get all button elements as variables
@@ -76,51 +77,90 @@ const calculatorButtons = [
   { element: allClear, output: "", class: "function" },
 ];
 
+
+//ON CLICK LISTENER
 const buttonClick = calculatorButtons.forEach((calcButton) => {
+    
   calcButton.element.addEventListener("click", () => {
-    if(calcButton.element === allClear) {
-        num1Array =[];
-        num2Array=[];
-        operatorArray=[];
-        para.textContent = '';
-        calculatedText.textContent = ''
-        para.setAttribute("style", "color: blue")
+
+   
+    if (answersArray[0]){
+        para.textContent='';
+        calculatedText.textContent = "";
+        answersArray=[];
     }
-    if (calcButton.class === 'number') {
-        para.textContent += calcButton.output
-        if (!operatorArray[0]) {
-            num1Array.push(calcButton.output)
-        } else {
-            num2Array.push(calcButton.output)
-        }
-    } else
-  if (calcButton.class === 'operator') {
-       
-        operatorArray.push(calcButton.output)
-        para.textContent += calcButton.output
-         
-    } if (calcButton.element === equals){
-        para.setAttribute("style","color: red");
-        calculatedText.textContent = para.textContent
-        calculatedText.textContent += calcButton.output
-        para.textContent = calcButton.output
+    if (calcButton.element === allClear) {
+      num1Array = [];
+      num2Array = [];
+      operatorArray = [];
+      para.textContent = "";
+      calculatedText.textContent = "";
+      para.setAttribute("style", "color: blue");
+      answered = false
+    }
+    if (calcButton.class === "number") {
+      para.textContent += calcButton.output;
+      if (!num1Array[0]) {
+        num1Array.push(calcButton.output);
+      } else {
+        num2Array.push(calcButton.output);
+      }
+    } else if (calcButton.class === "operator") {
+      if (!num2Array[0]) {
+        operatorArray.push(calcButton.output);
+        para.textContent += calcButton.output;
+      } else if (num2Array[0]) {
+        //calculate answer so far
+        //put the answer in content
+        //continue to dsiaply (without clearing in the upper text)
+        //make the asnwer numArray1
+        //clear numArray2
+        //clear operationArray
 
-
-       const num1 = parseFloat(num1Array.join(''))
-                             
-       const num2 =  parseFloat(num2Array.join(''));
-       const operator = operatorArray.join('');
-        operate(num1, num2, operator);
-        para.textContent = operate(num1, num2, operator).toFixed(determineDecimalPlaces());
+        calculatedText.textContent = para.textContent;
+        calculatedText.textContent += calcButton.output;
         
+        arraysToNumbers();
+        para.textContent += calcButton.output;
+
+        num1Array = [parseFloat(para.textContent)];
+        num2Array = [];
+        operatorArray =[calcButton.output];
+        answersArray=[];
+      }
     }
+     else if (calcButton.element === equals) {
+        para.setAttribute("style", "color: red;");
+        calculatedText.textContent = para.textContent;
+        calculatedText.textContent += calcButton.output;
+        para.textContent = calcButton.output;
+
+        arraysToNumbers();
+        num1Array = [];
+        num2Array = [];
+        operatorArray = [];
+        
+      }
+    
+  });
 });
-})
+
+function arraysToNumbers() {
+    const num1 = parseFloat(num1Array.join(''))
+                          
+    const num2 =  parseFloat(num2Array.join(''));
+    const operator = operatorArray.join('');
+     operate(num1, num2, operator);
+     para.textContent = operate(num1, num2, operator).toFixed(determineDecimalPlaces());
+     answersArray.push(para.textContent)
+}
 
 function determineDecimalPlaces() {
     let index1 = num1Array.indexOf('.');
     let index2 = num2Array.indexOf('.');
-
+if (index1 === -1 && index2 === -1){
+    return 0
+} else {
     let n1 = num1Array.length - (index1+1);
     let n2 = num2Array.length - (index2+2);
 
@@ -128,7 +168,7 @@ function determineDecimalPlaces() {
         return n1
     } return n2
 
-    
+}
 }
 
 // const equalsClicked = equals.addEventListener("click", () => {
