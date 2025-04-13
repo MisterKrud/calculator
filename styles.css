@@ -24,17 +24,37 @@ button {
 #screen {
     background-color: lightgray;
     color: blue;
+   
+   
     margin: 5px;
-    padding: 5px;
+    padding-right: 5px;
     height: 100px;
     display: flex;
-    justify-content: flex-end;
+   justify-content: space-between;
+    
+    
     font-size: 30px;
 }
 
-#display {
-    margin-right: 15px;
+#calculated-text {
+    align-self: flex-start;
+    margin: 5px;
+    
+    font-size: small;
+
+
+
+
 }
+
+#content {
+   
+    align-self: center;
+    justify-self: flex-end;
+    margin-right: 7px;
+}
+
+
 #buttons-container {
     display: flex;
     

@@ -48,6 +48,7 @@ const division = document.getElementById("divide");
 const allClear = document.getElementById("AC");
 const displayScreen = document.getElementById("screen");
 const para = document.getElementById("content");
+const calculatedText = document.getElementById("calculated-text");
 
 //const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
 //const operatorButtonArray=[plus, minus, division, multiplication];
@@ -82,6 +83,7 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         num2Array=[];
         operatorArray=[];
         para.textContent = '';
+        calculatedText.textContent = ''
     }
     if (calcButton.class === 'number') {
         para.textContent += calcButton.output
@@ -97,13 +99,16 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         para.textContent += calcButton.output
          
     } if (calcButton.element === equals){
-        para.textContent += calcButton.output
+        para.setAttribute("style","color: red");
+        calculatedText.textContent = para.textContent
+        calculatedText.textContent += calcButton.output
+        para.textContent = calcButton.output
        const num1 = parseInt(num1Array.join(''))
                              
        const num2 =  parseInt(num2Array.join(''));
        const operator = operatorArray.join('');
         operate(num1, num2, operator);
-        para.textContent += operate(num1, num2, operator)
+        para.textContent = operate(num1, num2, operator)
         
     }
 });
