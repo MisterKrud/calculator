@@ -12,7 +12,12 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+  if(num2 !=0){
   return num1 / num2;
+  } else {
+    para.textContent = 'Nope!'
+    calculatedText.textContent = "Dividing by Zero? That's whack!"
+  }
 }
 
 //CALCULATOR VARIABLES
@@ -132,7 +137,7 @@ para.textContent += calcButton.output;
 
     }
 
-
+//prevent two decimals in the same number
     if(calcButton.element===decimal){
 
 console.log('dot hit')
@@ -232,9 +237,7 @@ else if(calcButton.element===backspace){
 
         arraysToNumbers();
         //clear out the numbers to start again
-        num1Array = [];
-        num2Array = [];
-        operatorArray = [];
+       clear()
         }
       }
     
@@ -248,9 +251,12 @@ function arraysToNumbers() {
     const num2 =  parseFloat(num2Array.join(''));
     const operator = operatorArray.join('');
      operate(num1, num2, operator);
+     if(num2 !=0){
      para.textContent = operate(num1, num2, operator).toFixed(determineDecimalPlaces());
-     answersArray.push(para.textContent)
-    
+     
+     } else {
+      clear();}
+      answersArray.push(para.textContent)
 }
 
 //FUNCTION TO DETERMINE DECIMAL PLACES BASED ON INPUT NUMBER WITH THE MOST
@@ -269,6 +275,12 @@ if (index1 === -1 && index2 === -1){
 
 }
 }
+
+//Clear out arrays
+function clear() {
+  num1Array = [];
+num2Array = [];
+operatorArray = [];}
 
 
 //FUNCTION TO CHOOSE WHICH CALCULATION TO PERFORM
