@@ -83,9 +83,9 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
     
   calcButton.element.addEventListener("click", () => {
 
-   para.setAttribute("style", "color: blue");
+   para.setAttribute("style", "color: blue")
     if (answersArray[0]){
-       
+        para.textContent='';
         calculatedText.textContent='';
         answersArray=[];
     }
@@ -146,7 +146,7 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         para.textContent = calcButton.output;
 
         arraysToNumbers();
-        num1Array = [parseFloat(para.textContent)];
+        num1Array = [];
         num2Array = [];
         operatorArray = [];
         
