@@ -77,6 +77,12 @@ const calculatorButtons = [
 
 const buttonClick = calculatorButtons.forEach((calcButton) => {
   calcButton.element.addEventListener("click", () => {
+    if(calcButton.element === allClear) {
+        num1Array =[];
+        num2Array=[];
+        operatorArray=[];
+        para.textContent = '';
+    }
     if (calcButton.class === 'number') {
         para.textContent += calcButton.output
         if (!operatorArray[0]) {
