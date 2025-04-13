@@ -47,9 +47,11 @@ const minus = document.getElementById("minus");
 const multiplication = document.getElementById("multiply");
 const division = document.getElementById("divide");
 const allClear = document.getElementById("AC");
+const backspace = document.getElementById("backspace");
 const displayScreen = document.getElementById("screen");
 const para = document.getElementById("content");
 const calculatedText = document.getElementById("calculated-text");
+
 
 //const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
 //const operatorButtonArray=[plus, minus, division, multiplication];
@@ -75,6 +77,7 @@ const calculatorButtons = [
   { element: multiplication, output: "x", class: "operator", function: multiply() },
   { element: equals, output: "=", class: "function", function: operate() },
   { element: allClear, output: "", class: "function" },
+  { element: backspace, class: 'function'}
 ];
 
 
@@ -111,8 +114,33 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
       } else {
 //If a first number exists push didgits to second number array
         num2Array.push(calcButton.output);
-      }
+      } }
+// backspace is clicked
+else if(calcButton.element===backspace){
+        
+    console.log(typeof(para.textContent))
+    let screenText = para.textContent
+    let n = screenText.length
 
+   screenText = screenText.slice(0,n-1)
+   
+   para.textContent = screenText
+   
+   if (num2Array[0]){
+    num2Array.pop()
+   } else if (operatorArray[0]){
+    operatorArray.pop()
+   } else if (num1Array[0]) {
+    num1Array.pop();
+   }
+
+    
+    
+                                        
+    
+    
+     
+    
 //Operator is clicked
     } else if (calcButton.class === "operator") {
  //If no numbers have been input or the operator is pressed twice in a row- do nothing       
