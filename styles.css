@@ -106,7 +106,7 @@ button {
     justify-content: center;
 }
 
-#equals, #AC {
+#equals, #AC, #backspace {
    
     width: 75px;
 }
