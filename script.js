@@ -67,7 +67,7 @@ const calculatorButtons = [
   { element: eight, output: 8, class: "number" },
   { element: nine, output: 9, class: "number" },
   { element: zero, output: 0, class: "number" },
-  { element: decimal, output: ".", class: "operator" },
+  { element: decimal, output: ".", class: "number" },
   { element: plus, output: "+", class: "operator", function: add() },
   { element: minus, output: "-", class: "operator", function: subtract() },
   { element: division, output: "/", class: "operator", function: divide() },
@@ -84,6 +84,7 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         operatorArray=[];
         para.textContent = '';
         calculatedText.textContent = ''
+        para.setAttribute("style", "color: blue")
     }
     if (calcButton.class === 'number') {
         para.textContent += calcButton.output
@@ -103,18 +104,32 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         calculatedText.textContent = para.textContent
         calculatedText.textContent += calcButton.output
         para.textContent = calcButton.output
-       const num1 = parseInt(num1Array.join(''))
+
+
+       const num1 = parseFloat(num1Array.join(''))
                              
-       const num2 =  parseInt(num2Array.join(''));
+       const num2 =  parseFloat(num2Array.join(''));
        const operator = operatorArray.join('');
         operate(num1, num2, operator);
-        para.textContent = operate(num1, num2, operator)
+        para.textContent = operate(num1, num2, operator).toFixed(determineDecimalPlaces());
         
     }
 });
 })
 
+function determineDecimalPlaces() {
+    let index1 = num1Array.indexOf('.');
+    let index2 = num2Array.indexOf('.');
 
+    let n1 = num1Array.length - (index1+1);
+    let n2 = num2Array.length - (index2+2);
+
+    if (n1>n2){
+        return n1
+    } return n2
+
+    
+}
 
 // const equalsClicked = equals.addEventListener("click", () => {
 //   const mathArray = numArray.join('')
