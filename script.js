@@ -67,7 +67,7 @@ const calculatorButtons = [
   { element: seven, output: 7, class: "number" },
   { element: eight, output: 8, class: "number" },
   { element: nine, output: 9, class: "number" },
-  { element: zero, output: 0, class: "number" },
+  { element: zero, output: '0', class: "number" },
   { element: decimal, output: ".", class: "number" },
   { element: plus, output: "+", class: "operator", function: add() },
   { element: minus, output: "-", class: "operator", function: subtract() },
@@ -82,13 +82,16 @@ const calculatorButtons = [
 const buttonClick = calculatorButtons.forEach((calcButton) => {
     
   calcButton.element.addEventListener("click", () => {
-
+//reset text to blue
    para.setAttribute("style", "color: blue")
+
+//If a calculation has just been completed, empty the screen
     if (answersArray[0]){
         para.textContent='';
         calculatedText.textContent='';
         answersArray=[];
     }
+//All clear - reset everything
     if (calcButton.element === allClear) {
       num1Array = [];
       num2Array = [];
@@ -98,63 +101,76 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
       para.setAttribute("style", "color: blue");
       answered = false
     }
+   
+//Number is clicked add it to the screen
     if (calcButton.class === "number") {
       para.textContent += calcButton.output;
-      if (!num1Array[0]) {
+  //If this is the first number to calculate - add it to the first number digit array    
+      if (!operatorArray[0]) {
         num1Array.push(calcButton.output);
       } else {
+//If a first number exists push didgits to second number array
         num2Array.push(calcButton.output);
       }
+
+//Operator is clicked
     } else if (calcButton.class === "operator") {
-        if(!num1Array[0]) {
+ //If no numbers have been input or the operator is pressed twice in a row- do nothing       
+        if(!num1Array[0]|| (!num2Array[0]&&operatorArray[0])) {
 
         } else
+  //If the second number hasn't been clicked, display it and push it to the second number digit array      
       if (!num2Array[0]) {
         operatorArray.push(calcButton.output);
         para.textContent += calcButton.output;
+//If a second number has been typed
       } else if (num2Array[0]) {
-        //calculate answer so far
-        //put the answer in content
-        //continue to dsiaply (without clearing in the upper text)
-        //make the asnwer numArray1
-        //clear numArray2
-        //clear operationArray
-
+        
+//display what has been typed
         calculatedText.textContent = para.textContent;
         calculatedText.textContent += calcButton.output;
-        
+  //calculate the answer and display      
         arraysToNumbers();
         para.textContent += calcButton.output;
-
+//make the answer the first number, clear the second number and the operator
         num1Array = [parseFloat(para.textContent)];
         num2Array = [];
         operatorArray =[calcButton.output];
         answersArray=[];
       }
     }
+    //If equals is pressed
      else if (calcButton.element === equals) {
+//If nothing has been typed yet, do nothing - return 0
         if(!num1Array[0]){
             return 0
+
+            //If only one number has been input before pressing equals - return the number itself
         } else if (!num2Array[0]){
-            return parseFloat(num1Array.join(''))
-        }
+            let previousNumber = (parseFloat(num1Array.join('')))
+            num1Array=[previousNumber]
+            operatorArray=[]
+           para.textContent = previousNumber;
+        } else if(num2Array){
         
-         
+        //Of all numbers have been typed and calculated - show the answer. Make it red
         para.setAttribute("style", "color: red;");
         calculatedText.textContent = para.textContent;
         calculatedText.textContent += calcButton.output;
         para.textContent = calcButton.output;
 
         arraysToNumbers();
+        //clear out the numbers to start again
         num1Array = [];
         num2Array = [];
         operatorArray = [];
-        
+        }
       }
     
   });
 });
 
+//FUNCTION TO TAKE ALL INPUTS AND TURN THEM INTO NUMBERS
 function arraysToNumbers() {
     const num1 = parseFloat(num1Array.join(''))
                           
@@ -163,8 +179,10 @@ function arraysToNumbers() {
      operate(num1, num2, operator);
      para.textContent = operate(num1, num2, operator).toFixed(determineDecimalPlaces());
      answersArray.push(para.textContent)
+    
 }
 
+//FUNCTION TO DETERMINE DECIMAL PLACES BASED ON INPUT NUMBER WITH THE MOST
 function determineDecimalPlaces() {
     let index1 = num1Array.indexOf('.');
     let index2 = num2Array.indexOf('.');
@@ -181,13 +199,8 @@ if (index1 === -1 && index2 === -1){
 }
 }
 
-// const equalsClicked = equals.addEventListener("click", () => {
-//   const mathArray = numArray.join('')
-//                             .split('+')
-//                             console.log(mathArray)
-//  return mathArray
-// });
 
+//FUNCTION TO CHOOSE WHICH CALCULATION TO PERFORM
 function operate(num1, num2, operator) {
     
     if (operator === '+') {
@@ -203,99 +216,3 @@ function operate(num1, num2, operator) {
     
   }
 
-//    function calculateButtons() {
-//     calculateButtons.forEach((calcButton)=> {
-//         calcButton.element.addEventListener("click", () =>{
-//             if (calcButton.class === 'number'&& ){
-
-//             }
-//         })
-//     })
-//    }
-
-// const operatorSign = calculatorOperators.forEach((calcOperator) => {
-//     calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
-//     operationsArray.push(num)
-// })
-
-
-
-/*
-//EVENT LISTENERS FOR BUTTON CLICKS
-one.addEventListener("click", ()=> {
-      para.textContent += "1";
-}
-);
-
-two.addEventListener("click", ()=> {
-        para.textContent += "2";
- }
- );
-
- three.addEventListener("click", ()=> {
-    para.textContent += "3";
- }
- );
- four.addEventListener("click", ()=> {
-    para.textContent += "4";
-}
-);
-
-five.addEventListener("click", ()=> {
-      para.textContent += "5";
-}
-);
-
-six.addEventListener("click", ()=> {
-  para.textContent += "6";
-}
-);
-seven.addEventListener("click", ()=> {
-    para.textContent += "7";
-}
-);
-
-eight.addEventListener("click", ()=> {
-      para.textContent += "8";
-}
-);
-
-nine.addEventListener("click", ()=> {
-  para.textContent += "9";
-}
-);
-zero.addEventListener("click", ()=> {
-  para.textContent += "0";
-}
-);
-
-decimal.addEventListener("click", ()=> {
-    para.textContent += ".";
-  }
-  );
-
-plus.addEventListener("click", ()=> {
-    para.textContent += "+";
-}
-);
-
-minus.addEventListener("click", ()=> {
-para.textContent += "-";
-}
-);
-multiplication.addEventListener("click", ()=> {
-    para.textContent += "X";
-}
-);
-
-division.addEventListener("click", ()=> {
-para.textContent += "/";
-}
-);
-
-allClear.addEventListener("click", ()=> {
-    para.textContent = "";
-    }
-    );
-
-*/
