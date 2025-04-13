@@ -20,6 +20,8 @@ let number1
 let number2
 let operator
 
+let operationsArray=[]
+
 function operate(num1, num2, operator="add") {
     switch(operator) {
         case "add":
@@ -59,7 +61,7 @@ const para = document.getElementById("content");
 
 //const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
 //const operatorButtonArray=[plus, minus, division, multiplication];
-//const numberButtons = document.querySelectorAll("button")
+const numberButtons = document.querySelectorAll(".digit")
 
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorNumbers = [
@@ -81,19 +83,31 @@ const calculatorOperators = [
     {element: plus, output: '+', function: add()},
     {element: minus, output: '-',function: subtract()},
     {element: division, output: '/', function: divide()},
-    {element: multiplication, output: 'X', function: multiply()},
+    {element: multiplication, output: 'x', function: multiply()},
 ]
 
-  function firstNumber() {
-    const num1 = calculatorNumbers.forEach((calcButton) => {
+
+ 
+    function whenButtonClicked(){
+    const buttonClick = calculatorNumbers.forEach((calcButton) => {
     calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
-        })
-    calculatorOperators.forEach((calcOperator) => {
-        calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
-        return num1
-    })
-    console.log(para.textContent+' '+num1)
-  }
+        return para.textContent
+   
+    },
+    console.log(buttonClick))}
+   
+
+whenButtonClicked();
+    // const operatorSign = calculatorOperators.forEach((calcOperator) => {
+    //     calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
+    //     operationsArray.push(num)
+    // })
+
+console.log(operationsArray)
+
+    
+
+  
 /*
 //EVENT LISTENERS FOR BUTTON CLICKS
 one.addEventListener("click", ()=> {
