@@ -1,42 +1,31 @@
 //BASIC CALCULATOR FUNCTIONS
 function add(num1, num2) {
-    return (num1+num2);
+  return num1 + num2;
 }
 
 function subtract(num1, num2) {
-    return (num1-num2);
+  return num1 - num2;
 }
 
 function multiply(num1, num2) {
-    return num1*num2;
+  return num1 * num2;
 }
 
 function divide(num1, num2) {
-    return num1/num2
+  return num1 / num2;
 }
 
 //CALCULATOR VARIABLES
-let number1
-let number2
-let operator
+let number1;
+let number2;
+let operator;
 
-let operationsArray=[]
-let numArray=[]
+let operationsArray = [];
+let num1Array = [];
+let num2Array =[];
+let operatorArray=[]
 
-function operate(num1, num2, operator="add") {
-    switch(operator) {
-        case "add":
-            add(num1,num2);
-          break;
-        case "subtrac":
-            subtract(num1, num2);
-            break;
-        case "divide":
-            divide(num1, num2);
-        case "multiply":
-            multiply(num1, num2);
-    };
-};
+
 
 //get all button elements as variables
 const one = document.getElementById("one");
@@ -57,63 +46,87 @@ const minus = document.getElementById("minus");
 const multiplication = document.getElementById("multiply");
 const division = document.getElementById("divide");
 const allClear = document.getElementById("AC");
-const displayScreen = document.getElementById("screen")
+const displayScreen = document.getElementById("screen");
 const para = document.getElementById("content");
 
 //const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
 //const operatorButtonArray=[plus, minus, division, multiplication];
-const numberButtons = document.querySelectorAll(".digit")
+const numberButtons = document.querySelectorAll(".digit");
+
 
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorButtons = [
-    {element: one, output: 1, class: 'number'},
-    {element: two, output: 2, class: 'number'},
-    {element: three, output: 3, class: 'number'},
-    {element: four, output: 4, class: 'number'},
-    {element: five, output: 5, class: 'number'},
-    {element: six, output: 6, class: 'number'},
-    {element: seven, output: 7, class: 'number'},
-    {element: eight, output: 8, class: 'number'},
-    {element: nine, output: 9, class: 'number'},
-    {element: zero, output: 0, class: 'number'},
-    {element: decimal, output: '.', class: 'operator'},
-    {element: plus, output: '+', class: 'operator', function: add()},
-    {element: minus, output: '-', class: 'operator', function: subtract()},
-    {element: division, output: '/', class: 'operator', function: divide()},
-    {element: multiplication, output: 'x', class: 'operator', function: multiply()},
-    {element: equals, output: '=', class: 'function', function: operate()},
-    {element: allClear, output: '', class: 'function'},
-]
+  { element: one, output: 1, class: "number" },
+  { element: two, output: 2, class: "number" },
+  { element: three, output: 3, class: "number" },
+  { element: four, output: 4, class: "number" },
+  { element: five, output: 5, class: "number" },
+  { element: six, output: 6, class: "number" },
+  { element: seven, output: 7, class: "number" },
+  { element: eight, output: 8, class: "number" },
+  { element: nine, output: 9, class: "number" },
+  { element: zero, output: 0, class: "number" },
+  { element: decimal, output: ".", class: "operator" },
+  { element: plus, output: "+", class: "operator", function: add() },
+  { element: minus, output: "-", class: "operator", function: subtract() },
+  { element: division, output: "/", class: "operator", function: divide() },
+  { element: multiplication, output: "x", class: "operator", function: multiply() },
+  { element: equals, output: "=", class: "function", function: operate() },
+  { element: allClear, output: "", class: "function" },
+];
 
-
- 
-
-    const buttonClick = calculatorButtons.forEach((calcButton) => {
-    calcButton.element.addEventListener("click", ()=> {
-        para.textContent += calcButton.output;
-        if    (calcButton.class === 'number'){
-                numArray.push(calcButton.output)
-    } else if (calcButton.class==='operator'){
-                numArray.join(',');
-                numArray.push(calcButton.output);
-                let num1 = numArray[0];
-    }
-
+const buttonClick = calculatorButtons.forEach((calcButton) => {
+  calcButton.element.addEventListener("click", () => {
+    if (calcButton.class === 'number') {
+        para.textContent += calcButton.output
+        if (!operatorArray[0]) {
+            num1Array.push(calcButton.output)
+        } else {
+            num2Array.push(calcButton.output)
+        }
+    } else
+  if (calcButton.class === 'operator') {
+       
+        operatorArray.push(calcButton.output)
+        para.textContent += calcButton.output
          
-    })
+    } if (calcButton.element === equals){
+        para.textContent += calcButton.output
+       const num1 = parseInt(num1Array.join(''))
+                             
+       const num2 =  parseInt(num2Array.join(''));
+       const operator = operatorArray.join('');
+        operate(num1, num2, operator);
+        para.textContent += operate(num1, num2, operator)
+        
+    }
+});
 })
 
+
+
+// const equalsClicked = equals.addEventListener("click", () => {
+//   const mathArray = numArray.join('')
+//                             .split('+')
+//                             console.log(mathArray)
+//  return mathArray
+// });
+
+function operate(num1, num2, operator) {
     
-        const equalsClicked = equals.addEventListener("click", ()=> {
-          return  operationsArray.join('')
-                                  .split('+')
-                                  .split('-')
-                                  .split('/')
-                                  .split('x');
-            
-        })
-        console.log(operationsArray)
- 
+    if (operator === '+') {
+       return add(num1, num2)
+        
+    } else if (operator === '-') {
+       return subtract(num1, num2)
+    } else if (operator === '/') {
+        return divide(num1, num2) 
+    } else if (operator === 'x') {
+        return multiply(num1, num2);
+    }
+    
+  }
+
 //    function calculateButtons() {
 //     calculateButtons.forEach((calcButton)=> {
 //         calcButton.element.addEventListener("click", () =>{
@@ -124,17 +137,13 @@ const calculatorButtons = [
 //     })
 //    }
 
+// const operatorSign = calculatorOperators.forEach((calcOperator) => {
+//     calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
+//     operationsArray.push(num)
+// })
 
-    // const operatorSign = calculatorOperators.forEach((calcOperator) => {
-    //     calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
-    //     operationsArray.push(num)
-    // })
+console.log(operationsArray);
 
-console.log(operationsArray)
-
-    
-
-  
 /*
 //EVENT LISTENERS FOR BUTTON CLICKS
 one.addEventListener("click", ()=> {
@@ -214,4 +223,3 @@ allClear.addEventListener("click", ()=> {
     );
 
 */
-
