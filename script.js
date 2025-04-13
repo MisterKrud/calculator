@@ -21,11 +21,11 @@ let number2;
 let operator;
 
 let answersArray=[]
-let operationsArray = [];
+
 let num1Array = [];
 let num2Array =[];
 let operatorArray=[]
-let answered = false;
+
 
 
 //get all button elements as variables
@@ -83,10 +83,10 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
     
   calcButton.element.addEventListener("click", () => {
 
-   
+   para.setAttribute("style", "color: blue");
     if (answersArray[0]){
-        para.textContent='';
-        calculatedText.textContent = "";
+       
+        calculatedText.textContent='';
         answersArray=[];
     }
     if (calcButton.element === allClear) {
@@ -106,6 +106,9 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
         num2Array.push(calcButton.output);
       }
     } else if (calcButton.class === "operator") {
+        if(!num1Array[0]) {
+
+        } else
       if (!num2Array[0]) {
         operatorArray.push(calcButton.output);
         para.textContent += calcButton.output;
@@ -130,13 +133,20 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
       }
     }
      else if (calcButton.element === equals) {
+        if(!num1Array[0]){
+            return 0
+        } else if (!num2Array[0]){
+            return parseFloat(num1Array.join(''))
+        }
+        
+         
         para.setAttribute("style", "color: red;");
         calculatedText.textContent = para.textContent;
         calculatedText.textContent += calcButton.output;
         para.textContent = calcButton.output;
 
         arraysToNumbers();
-        num1Array = [];
+        num1Array = [parseFloat(para.textContent)];
         num2Array = [];
         operatorArray = [];
         
@@ -208,7 +218,7 @@ function operate(num1, num2, operator) {
 //     operationsArray.push(num)
 // })
 
-console.log(operationsArray);
+
 
 /*
 //EVENT LISTENERS FOR BUTTON CLICKS
