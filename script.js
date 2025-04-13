@@ -21,6 +21,7 @@ let number2
 let operator
 
 let operationsArray=[]
+let numArray=[]
 
 function operate(num1, num2, operator="add") {
     switch(operator) {
@@ -80,20 +81,50 @@ const calculatorButtons = [
     {element: minus, output: '-', class: 'operator', function: subtract()},
     {element: division, output: '/', class: 'operator', function: divide()},
     {element: multiplication, output: 'x', class: 'operator', function: multiply()},
+    {element: equals, output: '=', class: 'function', function: operate()},
+    {element: allClear, output: '', class: 'function'},
 ]
 
 
  
-    function whenButtonClicked(){
-    const buttonClick = calculatorNumbers.forEach((calcButton) => {
-    calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
-        return para.textContent
-   
-    }
-    )}
-   
 
-whenButtonClicked();
+    const buttonClick = calculatorButtons.forEach((calcButton) => {
+    calcButton.element.addEventListener("click", ()=> {
+        para.textContent += calcButton.output;
+        if    (calcButton.class === 'number'){
+                numArray.push(calcButton.output)
+    } else if (calcButton.class==='operator'){
+                numArray.join(',');
+                numArray.push(calcButton.output);
+                let num1 = numArray[0];
+    }
+
+         
+    })
+})
+
+    
+        const equalsClicked = equals.addEventListener("click", ()=> {
+          return  operationsArray.join('')
+                                  .split('+')
+                                  .split('-')
+                                  .split('/')
+                                  .split('x');
+            
+        })
+        console.log(operationsArray)
+ 
+//    function calculateButtons() {
+//     calculateButtons.forEach((calcButton)=> {
+//         calcButton.element.addEventListener("click", () =>{
+//             if (calcButton.class === 'number'&& ){
+
+//             }
+//         })
+//     })
+//    }
+
+
     // const operatorSign = calculatorOperators.forEach((calcOperator) => {
     //     calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
     //     operationsArray.push(num)
