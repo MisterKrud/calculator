@@ -57,38 +57,43 @@ const allClear = document.getElementById("AC");
 const displayScreen = document.getElementById("screen")
 const para = document.getElementById("content");
 
-const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
-const operatorButtonArray=[plus, minus, division, multiplication];
-const numberButtons = document.querySelectorAll("button")
+//const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
+//const operatorButtonArray=[plus, minus, division, multiplication];
+//const numberButtons = document.querySelectorAll("button")
 
+//NUMBER BUTTONS OBJECT ARRAY
 const calculatorNumbers = [
     {element: one, output: 1},
     {element: two, output: 2},
-    {element: four, output: 3},
-    {element: five, output: 4},
-    {element: six, output: 5},
-    {element: seven, output: 6},
-    {element: eight, output: 7},
-    {element: nine, output: 8},
-    {element: zero, output: 9},
-    {element: seven, output: 0},
+    {element: three, output: 3},
+    {element: four, output: 4},
+    {element: five, output: 5},
+    {element: six, output: 6},
+    {element: seven, output: 7},
+    {element: eight, output: 8},
+    {element: nine, output: 9},
+    {element: zero, output: 0},
+    {element: decimal, output: '.'},
+    
 ]
 
 const calculatorOperators = [
-    {element: plus, output: '+'},
-    {element: minus, output: '-'},
-    {element: division, output: '/'},
-    {element: multiplication, output: 'X'},
+    {element: plus, output: '+', function: add()},
+    {element: minus, output: '-',function: subtract()},
+    {element: division, output: '/', function: divide()},
+    {element: multiplication, output: 'X', function: multiply()},
 ]
 
-  const num1 =  calculatorNumbers.forEach((calcButton) => {
-        calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
-        console.log('clicked')
-        
-    
-})
-
-
+  function firstNumber() {
+    const num1 = calculatorNumbers.forEach((calcButton) => {
+    calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
+        })
+    calculatorOperators.forEach((calcOperator) => {
+        calcOperator.element.addEventListener("click", () => para.textContent += calcOperator.output)
+        return num1
+    })
+    console.log(para.textContent+' '+num1)
+  }
 /*
 //EVENT LISTENERS FOR BUTTON CLICKS
 one.addEventListener("click", ()=> {
