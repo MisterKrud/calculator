@@ -57,6 +57,39 @@ const allClear = document.getElementById("AC");
 const displayScreen = document.getElementById("screen")
 const para = document.getElementById("content");
 
+const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
+const operatorButtonArray=[plus, minus, division, multiplication];
+const numberButtons = document.querySelectorAll("button")
+
+const calculatorNumbers = [
+    {element: one, output: 1},
+    {element: two, output: 2},
+    {element: four, output: 3},
+    {element: five, output: 4},
+    {element: six, output: 5},
+    {element: seven, output: 6},
+    {element: eight, output: 7},
+    {element: nine, output: 8},
+    {element: zero, output: 9},
+    {element: seven, output: 0},
+]
+
+const calculatorOperators = [
+    {element: plus, output: '+'},
+    {element: minus, output: '-'},
+    {element: division, output: '/'},
+    {element: multiplication, output: 'X'},
+]
+
+  const num1 =  calculatorNumbers.forEach((calcButton) => {
+        calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
+        console.log('clicked')
+        
+    
+})
+
+
+/*
 //EVENT LISTENERS FOR BUTTON CLICKS
 one.addEventListener("click", ()=> {
       para.textContent += "1";
@@ -134,5 +167,5 @@ allClear.addEventListener("click", ()=> {
     }
     );
 
-
+*/
 
