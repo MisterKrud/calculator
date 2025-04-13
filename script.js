@@ -70,7 +70,7 @@ const calculatorButtons = [
   { element: eight, output: 8, class: "number" },
   { element: nine, output: 9, class: "number" },
   { element: zero, output: '0', class: "number" },
-  { element: decimal, output: ".", class: "number" },
+  { element: decimal, output: ".", class: "decimal" },
   { element: plus, output: "+", class: "operator", function: add() },
   { element: minus, output: "-", class: "operator", function: subtract() },
   { element: division, output: "/", class: "operator", function: divide() },
@@ -107,18 +107,60 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
    
 //Number is clicked add it to the screen
     if (calcButton.class === "number") {
-      para.textContent += calcButton.output;
+
+        
+      
+     
   //If this is the first number to calculate - add it to the first number digit array    
-      if (!operatorArray[0]) {
+     
+  
+  if (!operatorArray[0]) {
+    para.textContent += calcButton.output;
         num1Array.push(calcButton.output);
-      } else {
+      } 
+      
+      
+      
+      else {
 //If a first number exists push didgits to second number array
+para.textContent += calcButton.output;
         num2Array.push(calcButton.output);
-      } }
-// backspace is clicked
+      }
+    
+
+
+
+    }
+
+
+    if(calcButton.element===decimal){
+
+console.log('dot hit')
+       if(!operatorArray[0]){
+        if(num1Array.includes('.')){
+          console.log('Too many decimals')
+        } else {
+          console.log('first decimal of the number')
+            para.textContent += calcButton.output
+            num1Array.push(calcButton.output)
+          
+        }
+    
+
+       } else if (operatorArray[0]){
+        if (num2Array.includes('.')) {
+          console.log('Too many decimals')
+        } else {
+          console.log('first decimal of the number')
+            para.textContent += calcButton.output
+            num2Array.push(calcButton.output)
+        }
+       }
+      }
+// backspace is clicked remove one character
 else if(calcButton.element===backspace){
         
-    console.log(typeof(para.textContent))
+   
     let screenText = para.textContent
     let n = screenText.length
 
@@ -133,11 +175,12 @@ else if(calcButton.element===backspace){
    } else if (num1Array[0]) {
     num1Array.pop();
    }
+  
 
     
     
-                                        
-    
+                         
+     
     
      
     
