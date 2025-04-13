@@ -64,26 +64,22 @@ const para = document.getElementById("content");
 const numberButtons = document.querySelectorAll(".digit")
 
 //NUMBER BUTTONS OBJECT ARRAY
-const calculatorNumbers = [
-    {element: one, output: 1},
-    {element: two, output: 2},
-    {element: three, output: 3},
-    {element: four, output: 4},
-    {element: five, output: 5},
-    {element: six, output: 6},
-    {element: seven, output: 7},
-    {element: eight, output: 8},
-    {element: nine, output: 9},
-    {element: zero, output: 0},
-    {element: decimal, output: '.'},
-    
-]
-
-const calculatorOperators = [
-    {element: plus, output: '+', function: add()},
-    {element: minus, output: '-',function: subtract()},
-    {element: division, output: '/', function: divide()},
-    {element: multiplication, output: 'x', function: multiply()},
+const calculatorButtons = [
+    {element: one, output: 1, class: 'number'},
+    {element: two, output: 2, class: 'number'},
+    {element: three, output: 3, class: 'number'},
+    {element: four, output: 4, class: 'number'},
+    {element: five, output: 5, class: 'number'},
+    {element: six, output: 6, class: 'number'},
+    {element: seven, output: 7, class: 'number'},
+    {element: eight, output: 8, class: 'number'},
+    {element: nine, output: 9, class: 'number'},
+    {element: zero, output: 0, class: 'number'},
+    {element: decimal, output: '.', class: 'operator'},
+    {element: plus, output: '+', class: 'operator', function: add()},
+    {element: minus, output: '-', class: 'operator', function: subtract()},
+    {element: division, output: '/', class: 'operator', function: divide()},
+    {element: multiplication, output: 'x', class: 'operator', function: multiply()},
 ]
 
 
@@ -93,8 +89,8 @@ const calculatorOperators = [
     calcButton.element.addEventListener("click", ()=> para.textContent += calcButton.output)
         return para.textContent
    
-    },
-    console.log(buttonClick))}
+    }
+    )}
    
 
 whenButtonClicked();
