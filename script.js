@@ -263,7 +263,7 @@ function determineDecimalPlaces() {
     return 0;
   } else {
     let n1 = num1Array.length - (index1 + 1);
-    let n2 = num2Array.length - (index2 + 2);
+    let n2 = num2Array.length - (index2 + 1);
 
     if (n1 > n2) {
       return n1;
