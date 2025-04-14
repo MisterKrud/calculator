@@ -317,7 +317,7 @@ document.addEventListener("keydown", (e) => {
     }
   }
   //Swap between positive and negative number
-  else if (e.key === "_") {
+  else if (e.key === "-") {
     console.log("hit the +/- button");
     if (!operatorArray[0]) {
       if (num1Array[0] != "-") {
