@@ -60,6 +60,7 @@ const numberButtons = document.querySelectorAll(".digit");
 //ARRAYS FOR KEYBOARD SUPPORT
 const numberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operatorKeys = ["+", "-", "/", "*"];
+const equalsKeys = ["=", "Enter"];
 
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorButtons = [
@@ -109,7 +110,7 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
       para.textContent = "";
       calculatedText.textContent = "";
       para.setAttribute("style", "color: blue");
-      answered = false;
+     
     }
 
     //Number is clicked add it to the screen
@@ -242,11 +243,11 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
 //KEYBOARD FUNCTIONALITY
 document.addEventListener("keydown", (e) => {
   console.log(e);
-  const equalsKeys = ["=", "Enter"];
+  document.getElementById("calculator-container").focus();
   //  onkeydown = (e) => {
   //reset text to blue
   para.setAttribute("style", "color: black");
-
+ 
  
 
   //If a calculation has just been completed, empty the screen
@@ -365,7 +366,11 @@ document.addEventListener("keydown", (e) => {
     }
   }
   //If equals is pressed
-  else if (equalsKeys.includes(e.key)) {
+  else if (equalsKeys.includes(e.key) || e.code==='NumpadEnter'){
+  const activeButton = document.activeElement;
+  console.log(document.activeElement)
+  activeButton.blur();
+    
     //If nothing has been typed yet, do nothing - return 0
     if (!num1Array[0]) {
       return 0;
