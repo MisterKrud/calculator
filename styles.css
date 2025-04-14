@@ -16,7 +16,10 @@ button {
   justify-content: center;
  
 
-  border: #232323, solid, 6px;
+  /* border: #232323, solid, 6px; */
+  border-color: #232323;
+  border-style: solid;
+  border-width: 6px;
   background-color: rgb(71, 70, 70);
   border-radius: 10px;
 }
@@ -24,7 +27,10 @@ button {
 #screen {
   background-color: lightgray;
 
-  border: rgb(71, 70, 70), solid, 10px;
+  /* border: rgb(71, 70, 70), solid, 10px; */
+  border-color: rgb(71, 70, 70);
+  border-style: solid;
+  border-width: 10px;
   border-radius: 10px 10px 0 0;
   padding-right: 5px;
   height: 100px;
