@@ -55,26 +55,23 @@ const displayScreen = document.getElementById("screen");
 const para = document.getElementById("content");
 const calculatedText = document.getElementById("calculated-text");
 const posNeg = document.getElementById("positive-negative");
-
-//const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
-//const operatorButtonArray=[plus, minus, division, multiplication];
 const numberButtons = document.querySelectorAll(".digit");
 
-const numberKeys = ['1','2','3','4','5','6','7','8','9','0']
-const operatorKeys = ['+','-','/','*']
-
+//ARRAYS FOR KEYBOARD SUPPORT
+const numberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const operatorKeys = ["+", "-", "/", "*"];
 
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorButtons = [
-  { element: one, output: '1', class: "number" },
-  { element: two, output: '2', class: "number" },
-  { element: three, output: '3', class: "number" },
-  { element: four, output: '4', class: "number" },
-  { element: five, output: '5', class: "number" },
-  { element: six, output: '6', class: "number" },
-  { element: seven, output: '7', class: "number" },
-  { element: eight, output: '8', class: "number" },
-  { element: nine, output: '9', class: "number" },
+  { element: one, output: "1", class: "number" },
+  { element: two, output: "2", class: "number" },
+  { element: three, output: "3", class: "number" },
+  { element: four, output: "4", class: "number" },
+  { element: five, output: "5", class: "number" },
+  { element: six, output: "6", class: "number" },
+  { element: seven, output: "7", class: "number" },
+  { element: eight, output: "8", class: "number" },
+  { element: nine, output: "9", class: "number" },
   { element: zero, output: "0", class: "number" },
   { element: decimal, output: ".", class: "decimal" },
   { element: plus, output: "+", class: "operator", function: add() },
@@ -91,7 +88,6 @@ const calculatorButtons = [
   { element: backspace, class: "function" },
   { element: posNeg, class: "function" },
 ];
-
 
 //ON CLICK LISTENER
 const buttonClick = calculatorButtons.forEach((calcButton) => {
@@ -244,38 +240,34 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
 });
 
 //KEYBOARD FUNCTIONALITY
-document.addEventListener("keydown", (e)=>{
-  console.log(e)
-const equalsKeys = ['=','Enter']
-//  onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
+  console.log(e);
+  const equalsKeys = ["=", "Enter"];
+  //  onkeydown = (e) => {
   //reset text to blue
   para.setAttribute("style", "color: black");
 
-
-
-//  if(e.key !=('1'|| '2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'||'0'||'+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')){}
-//  else
+ 
 
   //If a calculation has just been completed, empty the screen
   if (answersArray[0]) {
- 
     para.textContent = "";
     calculatedText.textContent = "";
     answersArray = [];
   }
-  //All clear - reset everything
-  // if (e.key === 'ac'||'AC') {
-  //   num1Array = [];
-  //   num2Array = [];
-  //   operatorArray = [];
-  //   document.getElementById("content").textContent = "";
-  //   document.getElementById("calculated-text").textContent = "";
-  //   // para.setAttribute("style", "color: blue");
-  //   answered = false;
-  // }
+  // // All clear - reset everything
+  if (e.code === 'KeyA'|| e.code==='KeyC') {
+    num1Array = [];
+    num2Array = [];
+    operatorArray = [];
+    document.getElementById("content").textContent = "";
+    document.getElementById("calculated-text").textContent = "";
+    // para.setAttribute("style", "color: blue");
+    
+  }
 
   //Number is clicked add it to the screen
- if (numberKeys.includes(e.key)){
+  if (numberKeys.includes(e.key)) {
     if (!operatorArray[0]) {
       para.textContent += e.key;
       num1Array.push(e.key);
@@ -284,19 +276,16 @@ const equalsKeys = ['=','Enter']
       para.textContent += e.key;
       num2Array.push(e.key);
     }
-  
   }
   //prevent two decimals in the same number
-  if (e.key === '.') {
-    
+  if (e.key === ".") {
     console.log("dot hit");
     if (!operatorArray[0]) {
       if (num1Array.includes(".")) {
-        
         console.log("Too many decimals");
       } else {
         console.log("first decimal of the number");
-       para.textContent += e.key;
+        para.textContent += e.key;
         num1Array.push(e.key);
       }
     } else if (operatorArray[0]) {
@@ -310,25 +299,25 @@ const equalsKeys = ['=','Enter']
     }
   }
   // backspace is clicked remove one character
-  // else if (e.key === "Backspace") {
-    
-  //   let screenText = para.textContent;
-  //   let n = screenText.length;
+  else if (e.code === "Backspace") {
 
-  //   screenText = screenText.slice(0, n - 1);
+    let screenText = para.textContent;
+    let n = screenText.length;
 
-  //   para.textContent = screenText;
+    screenText = screenText.slice(0, n - 1);
 
-  //   if (num2Array[0]) {
-  //     num2Array.pop();
-  //   } else if (operatorArray[0]) {
-  //     operatorArray.pop();
-  //   } else if (num1Array[0]) {
-  //     num1Array.pop();
-  //   }
-  // }
+    para.textContent = screenText;
+
+    if (num2Array[0]) {
+      num2Array.pop();
+    } else if (operatorArray[0]) {
+      operatorArray.pop();
+    } else if (num1Array[0]) {
+      num1Array.pop();
+    }
+  }
   //Swap between positive and negative number
-  else if (e.key === '_') {
+  else if (e.key === "_") {
     console.log("hit the +/- button");
     if (!operatorArray[0]) {
       if (num1Array[0] != "-") {
@@ -377,7 +366,6 @@ const equalsKeys = ['=','Enter']
   }
   //If equals is pressed
   else if (equalsKeys.includes(e.key)) {
-   
     //If nothing has been typed yet, do nothing - return 0
     if (!num1Array[0]) {
       return 0;
@@ -392,22 +380,17 @@ const equalsKeys = ['=','Enter']
       //Of all numbers have been typed and calculated - show the answer. Make it red
       para.setAttribute("style", "color: #ff1303;");
       calculatedText.textContent = para.textContent;
-      calculatedText.textContent += '=';
-      para.textContent = '=';
+      calculatedText.textContent += "=";
+      para.textContent = "=";
 
       arraysToNumbers();
       //clear out the numbers to start again
       clear();
     }
-  } else {}
+  } else {console.log('wrong button')
+  }
+});
 
- })
- 
-
-
-
-// const buttonClick = calculatorButtons.forEach((calcButton) => {
-//   calcButton.element.addEventListener("click", () => {
 
 //FUNCTION TO TAKE ALL INPUTS AND TURN THEM INTO NUMBERS
 function arraysToNumbers() {
@@ -458,7 +441,7 @@ function operate(num1, num2, operator) {
     return subtract(num1, num2);
   } else if (operator === "/") {
     return divide(num1, num2);
-  } else if (operator === "x"||'*') {
+  } else if (operator === "x" || "*") {
     return multiply(num1, num2);
   }
 }
