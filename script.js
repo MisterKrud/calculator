@@ -56,6 +56,7 @@ const backspace = document.getElementById("backspace");
 const displayScreen = document.getElementById("screen");
 const para = document.getElementById("content");
 const calculatedText = document.getElementById("calculated-text");
+const posNeg = document.getElementById("positive-negative");
 
 
 //const numberButtonArray =[one, two, three, four, five, six, seven, eight, nine, zero]
@@ -82,7 +83,8 @@ const calculatorButtons = [
   { element: multiplication, output: "x", class: "operator", function: multiply() },
   { element: equals, output: "=", class: "function", function: operate() },
   { element: allClear, output: "", class: "function" },
-  { element: backspace, class: 'function'}
+  { element: backspace, class: 'function'},
+  { element: posNeg, class: 'function'},
 ];
 
 
@@ -180,8 +182,28 @@ else if(calcButton.element===backspace){
    } else if (num1Array[0]) {
     num1Array.pop();
    }
-  
-
+}
+//Swap between positive and negative number
+else if(calcButton.element===posNeg) {
+  console.log('hit the +/- button')
+  if(!operatorArray[0]) {
+    if(num1Array[0]!='-'){
+      num1Array.unshift('-');
+      para.textContent = `- ${para.textContent}`
+    } else {
+      num1Array.shift();
+      para.textContent = para.textContent.slice(1)
+    }
+  } else if(operatorArray[0]){
+    if(num2Array[0]!='-'){
+      num2Array.unshift('-');
+      para.textContent = `${num1Array.join('')}${operatorArray}${num2Array.join('')}`
+    } else {
+      num2Array.shift();
+      para.textContent = para.textContent.slice(1)
+    }
+  }
+}
     
     
                          
@@ -190,7 +212,7 @@ else if(calcButton.element===backspace){
      
     
 //Operator is clicked
-    } else if (calcButton.class === "operator") {
+    else if (calcButton.class === "operator") {
  //If no numbers have been input or the operator is pressed twice in a row- do nothing       
         if(!num1Array[0]|| (!num2Array[0]&&operatorArray[0])) {
 
