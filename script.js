@@ -62,15 +62,15 @@ const numberButtons = document.querySelectorAll(".digit");
 
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorButtons = [
-  { element: one, output: 1, class: "number" },
-  { element: two, output: 2, class: "number" },
-  { element: three, output: 3, class: "number" },
-  { element: four, output: 4, class: "number" },
-  { element: five, output: 5, class: "number" },
-  { element: six, output: 6, class: "number" },
-  { element: seven, output: 7, class: "number" },
-  { element: eight, output: 8, class: "number" },
-  { element: nine, output: 9, class: "number" },
+  { element: one, output: '1', class: "number" },
+  { element: two, output: '2', class: "number" },
+  { element: three, output: '3', class: "number" },
+  { element: four, output: '4', class: "number" },
+  { element: five, output: '5', class: "number" },
+  { element: six, output: '6', class: "number" },
+  { element: seven, output: '7', class: "number" },
+  { element: eight, output: '8', class: "number" },
+  { element: nine, output: '9', class: "number" },
   { element: zero, output: "0", class: "number" },
   { element: decimal, output: ".", class: "decimal" },
   { element: plus, output: "+", class: "operator", function: add() },
@@ -87,6 +87,7 @@ const calculatorButtons = [
   { element: backspace, class: "function" },
   { element: posNeg, class: "function" },
 ];
+
 
 //ON CLICK LISTENER
 const buttonClick = calculatorButtons.forEach((calcButton) => {
@@ -237,6 +238,168 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
     }
   });
 });
+
+//KEYBOARD FUNCTIONALITY
+document.addEventListener("keydown", (e)=>{
+  e.preventDefault();
+//  onkeydown = (e) => {
+  //reset text to blue
+  para.setAttribute("style", "color: black");
+
+
+
+ if(e.key !=('1'|| '2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'||'0'||'+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')){e.preventDefault()}
+ else
+
+  //If a calculation has just been completed, empty the screen
+  if (answersArray[0]) {
+    para.textContent = "";
+    calculatedText.textContent = "";
+    answersArray = [];
+  }
+  //All clear - reset everything
+  // if (e.key === 'ac'||'AC') {
+  //   num1Array = [];
+  //   num2Array = [];
+  //   operatorArray = [];
+  //   document.getElementById("content").textContent = "";
+  //   document.getElementById("calculated-text").textContent = "";
+  //   // para.setAttribute("style", "color: blue");
+  //   answered = false;
+  // }
+
+  //Number is clicked add it to the screen
+ 
+    if (!operatorArray[0]) {
+      para.textContent += e.key;
+      num1Array.push(e.key);
+    } else {
+      //If a first number exists push didgits to second number array
+      para.textContent += e.key;
+      num2Array.push(e.key);
+    }
+  
+
+  //prevent two decimals in the same number
+  if (e.key === '.') {
+    console.log("dot hit");
+    if (!operatorArray[0]) {
+      if (num1Array.includes(".")) {
+        console.log("Too many decimals");
+      } else {
+        console.log("first decimal of the number");
+        para.textContent += e.key;
+        num1Array.push(e.key);
+      }
+    } else if (operatorArray[0]) {
+      if (num2Array.includes(".")) {
+        console.log("Too many decimals");
+      } else {
+        console.log("first decimal of the number");
+        para.textContent += e.key;
+        num2Array.push(e.key);
+      }
+    }
+  }
+  // backspace is clicked remove one character
+  else if (e.key === "Backspace") {
+    e.preventDefault()
+    let screenText = para.textContent;
+    let n = screenText.length;
+
+    screenText = screenText.slice(0, n - 1);
+
+    para.textContent = screenText;
+
+    if (num2Array[0]) {
+      num2Array.pop();
+    } else if (operatorArray[0]) {
+      operatorArray.pop();
+    } else if (num1Array[0]) {
+      num1Array.pop();
+    }
+  }
+  //Swap between positive and negative number
+  else if (e.key === '_') {
+    console.log("hit the +/- button");
+    if (!operatorArray[0]) {
+      if (num1Array[0] != "-") {
+        num1Array.unshift("-");
+        para.textContent = `- ${para.textContent}`;
+      } else {
+        num1Array.shift();
+        para.textContent = para.textContent.slice(1);
+      }
+    } else if (operatorArray[0]) {
+      if (num2Array[0] != "-") {
+        num2Array.unshift("-");
+        para.textContent = `${num1Array.join(
+          ""
+        )}${operatorArray}${num2Array.join("")}`;
+      } else {
+        num2Array.shift();
+        para.textContent = para.textContent.slice(1);
+      }
+    }
+  }
+
+  //Operator is clicked
+  else if (e.key === ('+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')) {
+    //If no numbers have been input or the operator is pressed twice in a row- do nothing
+    if (!num1Array[0] || (!num2Array[0] && operatorArray[0])) {
+    }
+    //If the second number hasn't been clicked, display it and push it to the second number digit array
+    else if (!num2Array[0]) {
+      operatorArray.push(e.key);
+      para.textContent += e.key;
+      //If a second number has been typed
+    } else if (num2Array[0]) {
+      //display what has been typed
+      calculatedText.textContent = para.textContent;
+      calculatedText.textContent += e.key;
+      //calculate the answer and display
+      arraysToNumbers();
+      para.textContent += e.key;
+      //make the answer the first number, clear the second number and the operator
+      num1Array = [parseFloat(para.textContent)];
+      num2Array = [];
+      operatorArray = [e.key];
+      answersArray = [];
+    }
+  }
+  //If equals is pressed
+  else if (e.key === '='||'Enter') {
+    e.preventDefault();
+    //If nothing has been typed yet, do nothing - return 0
+    if (!num1Array[0]) {
+      return 0;
+
+      //If only one number has been input before pressing equals - return the number itself
+    } else if (!num2Array[0]) {
+      let previousNumber = parseFloat(num1Array.join(""));
+      num1Array = [previousNumber];
+      operatorArray = [];
+      para.textContent = previousNumber;
+    } else if (num2Array[0]) {
+      //Of all numbers have been typed and calculated - show the answer. Make it red
+      para.setAttribute("style", "color: #ff1303;");
+      calculatedText.textContent = para.textContent;
+      calculatedText.textContent += '=';
+      para.textContent = '=';
+
+      arraysToNumbers();
+      //clear out the numbers to start again
+      clear();
+    }
+  } else {}
+
+ })
+ 
+
+
+
+// const buttonClick = calculatorButtons.forEach((calcButton) => {
+//   calcButton.element.addEventListener("click", () => {
 
 //FUNCTION TO TAKE ALL INPUTS AND TURN THEM INTO NUMBERS
 function arraysToNumbers() {

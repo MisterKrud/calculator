@@ -15,7 +15,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-   
+   width: 50%;
    
     border: #232323, solid, 6px;
     background-color:rgb(71, 70, 70);
@@ -34,10 +34,18 @@ button {
     height: 100px;
     display: flex;
     
+    
    justify-content: space-between;
     
     
    
+}
+
+
+input {
+    appearance: none;
+    display: flex; 
+  width: 100%;
 }
 
 
