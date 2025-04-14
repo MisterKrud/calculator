@@ -60,6 +60,10 @@ const posNeg = document.getElementById("positive-negative");
 //const operatorButtonArray=[plus, minus, division, multiplication];
 const numberButtons = document.querySelectorAll(".digit");
 
+const numberKeys = ['1','2','3','4','5','6','7','8','9','0']
+const operatorKeys = ['+','-','/','*']
+
+
 //NUMBER BUTTONS OBJECT ARRAY
 const calculatorButtons = [
   { element: one, output: '1', class: "number" },
@@ -241,18 +245,20 @@ const buttonClick = calculatorButtons.forEach((calcButton) => {
 
 //KEYBOARD FUNCTIONALITY
 document.addEventListener("keydown", (e)=>{
-  e.preventDefault();
+  console.log(e)
+const equalsKeys = ['=','Enter']
 //  onkeydown = (e) => {
   //reset text to blue
   para.setAttribute("style", "color: black");
 
 
 
- if(e.key !=('1'|| '2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'||'0'||'+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')){e.preventDefault()}
- else
+//  if(e.key !=('1'|| '2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'||'0'||'+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')){}
+//  else
 
   //If a calculation has just been completed, empty the screen
   if (answersArray[0]) {
+ 
     para.textContent = "";
     calculatedText.textContent = "";
     answersArray = [];
@@ -269,7 +275,7 @@ document.addEventListener("keydown", (e)=>{
   // }
 
   //Number is clicked add it to the screen
- 
+ if (numberKeys.includes(e.key)){
     if (!operatorArray[0]) {
       para.textContent += e.key;
       num1Array.push(e.key);
@@ -279,16 +285,18 @@ document.addEventListener("keydown", (e)=>{
       num2Array.push(e.key);
     }
   
-
+  }
   //prevent two decimals in the same number
   if (e.key === '.') {
+    
     console.log("dot hit");
     if (!operatorArray[0]) {
       if (num1Array.includes(".")) {
+        
         console.log("Too many decimals");
       } else {
         console.log("first decimal of the number");
-        para.textContent += e.key;
+       para.textContent += e.key;
         num1Array.push(e.key);
       }
     } else if (operatorArray[0]) {
@@ -302,23 +310,23 @@ document.addEventListener("keydown", (e)=>{
     }
   }
   // backspace is clicked remove one character
-  else if (e.key === "Backspace") {
-    e.preventDefault()
-    let screenText = para.textContent;
-    let n = screenText.length;
+  // else if (e.key === "Backspace") {
+    
+  //   let screenText = para.textContent;
+  //   let n = screenText.length;
 
-    screenText = screenText.slice(0, n - 1);
+  //   screenText = screenText.slice(0, n - 1);
 
-    para.textContent = screenText;
+  //   para.textContent = screenText;
 
-    if (num2Array[0]) {
-      num2Array.pop();
-    } else if (operatorArray[0]) {
-      operatorArray.pop();
-    } else if (num1Array[0]) {
-      num1Array.pop();
-    }
-  }
+  //   if (num2Array[0]) {
+  //     num2Array.pop();
+  //   } else if (operatorArray[0]) {
+  //     operatorArray.pop();
+  //   } else if (num1Array[0]) {
+  //     num1Array.pop();
+  //   }
+  // }
   //Swap between positive and negative number
   else if (e.key === '_') {
     console.log("hit the +/- button");
@@ -344,7 +352,7 @@ document.addEventListener("keydown", (e)=>{
   }
 
   //Operator is clicked
-  else if (e.key === ('+'||'-'||'*'||'/'||'+'||'/'||'*'||'-')) {
+  else if (operatorKeys.includes(e.key)) {
     //If no numbers have been input or the operator is pressed twice in a row- do nothing
     if (!num1Array[0] || (!num2Array[0] && operatorArray[0])) {
     }
@@ -368,8 +376,8 @@ document.addEventListener("keydown", (e)=>{
     }
   }
   //If equals is pressed
-  else if (e.key === '='||'Enter') {
-    e.preventDefault();
+  else if (equalsKeys.includes(e.key)) {
+   
     //If nothing has been typed yet, do nothing - return 0
     if (!num1Array[0]) {
       return 0;
@@ -450,7 +458,7 @@ function operate(num1, num2, operator) {
     return subtract(num1, num2);
   } else if (operator === "/") {
     return divide(num1, num2);
-  } else if (operator === "x") {
+  } else if (operator === "x"||'*') {
     return multiply(num1, num2);
   }
 }
