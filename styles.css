@@ -35,8 +35,8 @@ button {
   padding-right: 5px;
   height: 100px;
   display: flex;
-
-  justify-content: space-between;
+flex-direction: column;
+  
 }
 
 input {
@@ -48,13 +48,16 @@ input {
 #calculated-text {
   align-self: flex-start;
   margin: 5px;
+  /* border: black 1px solid; */
 
   font-size: medium;
 }
 
 #content {
-  align-self: center;
+  align-self: flex-end;
   justify-self: flex-end;
+  /* border: black 1px solid;  */
+  
   margin-right: 7px;
   font-size: 48px;
 }
