@@ -403,11 +403,37 @@ function arraysToNumbers() {
 
   const num2 = parseFloat(num2Array.join(""));
   const operator = operatorArray.join("");
-  operate(num1, num2, operator);
-  if (num2 != 0) {
-    para.textContent = operate(num1, num2, operator).toFixed(
-      determineDecimalPlaces()
-    );
+  operate(num1, num2, operator);  
+  if (num2Array[0]) {
+   const solution = operate(num1, num2, operator)
+   console.log(solution+':solution: '+typeof(solution))
+   
+
+   let solutionArray= solution.toString().split('')
+   console.log(solutionArray+': solutionArray');
+  
+  
+   let decimalIndex = solutionArray.indexOf('.');
+  
+   if (decimalIndex === -1){
+    para.textContent = solution
+   } else {
+    console.log(decimalIndex+': decimalIndex');
+   let solutionLength = solutionArray.length
+   console.log(solutionLength+': solutionLength')
+
+   let numberOfDecimals = parseInt(solutionLength - (decimalIndex+1));
+   let integerLength = solutionLength-numberOfDecimals
+   console.log(integerLength+': integerLength')
+   
+   if (solutionLength>9){
+     numberOfDecimals = solutionLength - 9-integerLength;
+     console.log(numberOfDecimals+ ': numberOfDecimals');
+     para.textContent = solution.toFixed(parseInt(numberOfDecimals));
+   }
+   else{para.textContent = solution}
+   
+  }
   } else {
     clear();
   }
@@ -415,7 +441,10 @@ function arraysToNumbers() {
 }
 
 //FUNCTION TO DETERMINE DECIMAL PLACES BASED ON INPUT NUMBER WITH THE MOST
-function determineDecimalPlaces() {
+function determineDecimalPlaces(answer) {
+
+ 
+
   let index1 = num1Array.indexOf(".");
   let index2 = num2Array.indexOf(".");
   if (index1 === -1 && index2 === -1) {
