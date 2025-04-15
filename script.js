@@ -426,8 +426,8 @@ function arraysToNumbers() {
    let integerLength = solutionLength-numberOfDecimals
    console.log(integerLength+': integerLength')
    
-   if (solutionLength>9){
-     numberOfDecimals = solutionLength - 9-integerLength;
+   if (solutionLength>12){
+     numberOfDecimals = solutionLength - 12-integerLength;
      console.log(numberOfDecimals+ ': numberOfDecimals');
      para.textContent = solution.toFixed(parseInt(numberOfDecimals));
    }
