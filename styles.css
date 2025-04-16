@@ -14,8 +14,9 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
 
+
+  border: #232323, solid, 6px;
   /* border: #232323, solid, 6px; */
   border-color: #232323;
   border-style: solid;
@@ -27,6 +28,7 @@ button {
 #screen {
   background-color: lightgray;
 
+  border: rgb(71, 70, 70), solid, 10px;
   /* border: rgb(71, 70, 70), solid, 10px; */
   border-color: rgb(71, 70, 70);
   border-style: solid;
@@ -35,9 +37,8 @@ button {
   padding-right: 5px;
   height: 100px;
   display: flex;
-flex-direction: column;
-justify-content: flex-start;
-  
+
+  justify-content: space-between;
 }
 
 input {
@@ -49,16 +50,13 @@ input {
 #calculated-text {
   align-self: flex-start;
   margin: 5px;
-  /* border: black 1px solid; */
 
   font-size: medium;
 }
 
 #content {
-  align-self: flex-end;
-  
-  /* border: black 1px solid;  */
-  
+  align-self: center;
+  justify-self: flex-end;
   margin-right: 7px;
   font-size: 48px;
 }
